@@ -43,7 +43,7 @@ var matchRecursive = function () {
 	var pos = 0;
 	for (i=0; i < tokens.length; i++)
 	{
-		pos_new = this.search(openToken+tokens[i]);
+		pos_new = this.indexOf(openToken+tokens[i]);
 		news = news + this.substr(pos, pos_new - pos);
 		pos = pos_new + openToken.length + closeToken.length + tokens[i].length;
 		news = news + openHtml + tokens[i] + closeHtml;
