@@ -1,6 +1,11 @@
 # markupToHtml
 
-If people are using your site to create/edit content, you don't want them forced to use HTML like <div style="float:right"> or whatever.
+If people are using your site to create/edit content, you don't want them forced to use HTML like
+
+```
+<div style="float:right">
+```
+or whatever.
 
 Also you probably filter any HTML from the user's submission for safety.
 
@@ -14,6 +19,7 @@ into
 
 ```
 <div class="right aligned segment">content blah blah</div>Lorem Ipsum etc <div class="left aligned segment">left aligned content</div>
+```
 
 (Well, you can choose the markup tags to replace, and what HTML they'll be replaced with.
 
@@ -21,6 +27,7 @@ into
 
 ```
 myMarkup = "a string with {{some kind of markup/}}";
+//myMarkup.markupToHtml(openToken,closeToken,openHtml,closeHtml)
 myHtml = myMarkup.markupToHtml('{{','/}}','<div class="myclass">','</div>');
 ```
 
