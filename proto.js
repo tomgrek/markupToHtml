@@ -2,6 +2,10 @@ String.prototype.markupToHtml = function(openToken, closeToken, openHtml, closeH
 {
 
 if (openToken == closeToken) throw new Error("start and end format tokens cannot be identical");
+// skip this and return unaltered string if markup is not present
+if (this.indexOf(openToken)==-1) return this;
+if (this.indexOf(closeToken)==-1) return this;
+
 
 var matchRecursive = function () {
 	var	formatParts = /^([\S\s]+?)\.\.\.([\S\s]+)/,
@@ -39,6 +43,11 @@ var matchRecursive = function () {
 }();
 
 	var tokens = matchRecursive(this,openToken+'...'+closeToken);
+	// return unaltered if not found
+	if (tokens.length <= 0) return this;
+	// return unaltered if number of openTokens doesnt match number of closeTokens, and v.v.
+	if (tokens.length + 1 != this.split(openToken).length) return this; 
+	if (tokens.length + 1 != this.split(closeToken).length) return this;
 	news = '';
 	var pos = 0;
 	for (i=0; i < tokens.length; i++)
@@ -48,6 +57,6 @@ var matchRecursive = function () {
 		pos = pos_new + openToken.length + closeToken.length + tokens[i].length;
 		news = news + openHtml + tokens[i] + closeHtml;
 	}
+	news = news + this.substr(this.lastIndexOf(closeToken)+closeToken.length, this.length);
 	return news;
 }
-
